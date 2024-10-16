@@ -1,0 +1,15 @@
+
+# CLI tool, only in development environment.
+# https://goframe.org/pages/viewpage.action?pageId=3673173
+gfcli:
+  docker:
+    build: "-a amd64 -s linux -p temp -ew"
+    tagPrefixes:
+      - my.image.pub/my-app
+  gen:
+    dao:
+      - link: "pgsql:host=localhost user=root password=pass@word1 dbname=idx port=5432 sslmode=disable TimeZone=Asia/Shanghai"
+        tablesEx: "authorizations,casbin_rule,"
+        descriptionTag: true
+        gJsonSupport: true
+        noModelComment: true
