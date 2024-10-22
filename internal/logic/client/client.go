@@ -11,6 +11,7 @@ import (
 	"github.com/wingfeng/idx-oauth2/utils"
 	v1 "github.com/wingfeng/idxadmin/api/client/v1"
 	"github.com/wingfeng/idxadmin/internal/dao"
+	"github.com/wingfeng/idxadmin/internal/logic/common"
 	"github.com/wingfeng/idxadmin/internal/model/do"
 	"github.com/wingfeng/idxadmin/internal/model/entity"
 	"github.com/wingfeng/idxadmin/internal/service"
@@ -44,7 +45,7 @@ func (s *sClient) List(ctx context.Context, req v1.PageReq) (*v1.PageRes, error)
 	g.Log().Info(ctx, "req", req)
 	items := make([]entity.Clients, 0)
 	count := 0
-	err := dao.Clients.Ctx(ctx).Order(req.SortField, req.GetSortOrder()).ScanAndCount(&items, &count, true)
+	err := dao.Clients.Ctx(ctx).Handler(common.Paginate(&req.PageReq)).ScanAndCount(&items, &count, true)
 	res := &v1.PageRes{}
 	res.PageSize = req.PageSize
 	res.Page = req.Page

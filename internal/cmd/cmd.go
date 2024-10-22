@@ -8,6 +8,8 @@ import (
 	"github.com/gogf/gf/v2/os/gcmd"
 
 	"github.com/wingfeng/idxadmin/internal/controller/client"
+	"github.com/wingfeng/idxadmin/internal/controller/orgunit"
+	"github.com/wingfeng/idxadmin/internal/controller/user"
 )
 
 var (
@@ -22,6 +24,13 @@ var (
 				group.Bind(
 
 					client.NewV1(),
+				)
+			})
+			s.Group("/api/v1/system", func(group *ghttp.RouterGroup) {
+				group.Middleware(ghttp.MiddlewareHandlerResponse)
+				group.Bind(
+					user.NewV1(),
+					orgunit.NewV1(),
 				)
 			})
 			s.Run()

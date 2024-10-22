@@ -5,17 +5,19 @@
 package entity
 
 import (
+
 	"github.com/gogf/gf/v2/os/gtime"
+	"github.com/wingfeng/idxadmin/internal/model"
 )
 
 // OrganizationUnits is the golang structure for table organization_units.
 type OrganizationUnits struct {
 	Name        string      `json:"name"        orm:"name"         description:""`
 	DisplayName string      `json:"displayName" orm:"display_name" description:""`
-	ParentId    int64       `json:"parentId"    orm:"parent_id"    description:""`
+	ParentId    model.ID       `json:"parentId,omitempty"    orm:"parent_id"    description:""`
 	SortOrder   int64       `json:"sortOrder"   orm:"sort_order"   description:""`
 	Path        string      `json:"path"        orm:"path"         description:""`
-	Id          int64       `json:"id"          orm:"id"           description:""`
+	Id          model.ID       `json:"id"          orm:"id"           description:""`
 	Creator     string      `json:"creator"     orm:"creator"      description:""`
 	CreatorId   string      `json:"creatorId"   orm:"creator_id"   description:""`
 	Updator     string      `json:"updator"     orm:"updator"      description:""`

@@ -11,7 +11,7 @@ import (
 )
 
 type GetReq struct {
-	g.Meta `path:"/client/{Id}.info" tags:"Client" method:"get" summary:"get client info by id"`
+	g.Meta `path:"/client/{Id}" tags:"Client" method:"get" summary:"get client info by id"`
 	Id     int
 }
 type GetRes struct {
@@ -49,7 +49,7 @@ type GenerateSecretRes struct {
 	Secret string
 }
 type DeleteSecretReq struct {
-	g.Meta `path:"/client/deletesecret/{Id}" tags:"Client" method:"delete" summary:"delete a client secret by id"`
+	g.Meta `path:"/client/deletesecret" tags:"Client" method:"delete" summary:"delete a client secret by id"`
 	Id     string
 }
 type DeleteSecretRes struct {

@@ -1,11 +1,15 @@
 module github.com/wingfeng/idxadmin
 
-go 1.18
+go 1.22
+
+toolchain go1.22.4
 
 require github.com/gogf/gf/v2 v2.7.4
 
 require (
 	github.com/BurntSushi/toml v1.3.2 // indirect
+	github.com/brianvoe/gofakeit/v7 v7.0.4 // indirect
+	github.com/bwmarrin/snowflake v0.3.0 // indirect
 	github.com/clbanning/mxj/v2 v2.7.0 // indirect
 	github.com/emirpasic/gods v1.18.1 // indirect
 	github.com/fatih/color v1.16.0 // indirect

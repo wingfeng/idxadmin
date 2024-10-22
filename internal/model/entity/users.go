@@ -7,11 +7,12 @@ package entity
 import (
 	"github.com/gogf/gf/v2/encoding/gjson"
 	"github.com/gogf/gf/v2/os/gtime"
+	"github.com/wingfeng/idxadmin/internal/model"
 )
 
 // Users is the golang structure for table users.
 type Users struct {
-	OuId                 int64       `json:"ouId"                 orm:"ou_id"                  description:""`
+	OuId                 model.ID       `json:"ouId"                 orm:"ou_id"                  description:""`
 	Ou                   string      `json:"ou"                   orm:"ou"                     description:""`
 	Account              string      `json:"account"              orm:"account"                description:""`
 	DisplayName          string      `json:"displayName"          orm:"display_name"           description:""`
@@ -28,7 +29,7 @@ type Users struct {
 	LockoutEnd           *gtime.Time `json:"lockoutEnd"           orm:"lockout_end"            description:""`
 	LockoutEnabled       bool        `json:"lockoutEnabled"       orm:"lockout_enabled"        description:""`
 	AccessFailedCount    int64       `json:"accessFailedCount"    orm:"access_failed_count"    description:""`
-	Id                   int64       `json:"id"                   orm:"id"                     description:""`
+	Id                   model.ID       `json:"id"                   orm:"id"                     description:""`
 	Creator              string      `json:"creator"              orm:"creator"                description:""`
 	CreatorId            string      `json:"creatorId"            orm:"creator_id"             description:""`
 	Updator              string      `json:"updator"              orm:"updator"                description:""`
