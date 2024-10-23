@@ -7,13 +7,13 @@ import (
 	"github.com/gogf/gf/v2/errors/gerror"
 	"github.com/gogf/gf/v2/util/gconv"
 	v1 "github.com/wingfeng/idxadmin/api/orgunit/v1"
-	"github.com/wingfeng/idxadmin/internal/model/do"
+	"github.com/wingfeng/idxadmin/internal/model/entity"
 	"github.com/wingfeng/idxadmin/internal/service"
 )
 
 func (c *ControllerV1) Tree(ctx context.Context, req *v1.TreeReq) (res *v1.TreeRes, err error) {
 	items, err := service.OrgUnit().Tree(ctx)
-	list := make([]*do.OrganizationUnitsEx, 0)
+	list := make([]*entity.OrganizationUnitsEx, 0)
 	gconv.Scan(items, &list)
 	res = &v1.TreeRes{
 		Items: list,

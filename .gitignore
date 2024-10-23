@@ -10,7 +10,10 @@ bin/
 **/.DS_Store
 gf
 main
+*.exe
+.exe
 main.exe
+*.exe~
 output/
 manifest/output/
 temp/

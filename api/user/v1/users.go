@@ -3,19 +3,19 @@ package v1
 import (
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/wingfeng/idxadmin/internal/model"
-	"github.com/wingfeng/idxadmin/internal/model/do"
+	"github.com/wingfeng/idxadmin/internal/model/entity"
 )
 
 type GetReq struct {
 	g.Meta `path:"/user/{id}" tags:"user" method:"get" summary:"get client info by id"`
-	Id     int64
+	Id     int64 `v:"required"`
 }
 type GetRes struct {
-	do.Users
+	entity.Users
 }
 type DeleteReq struct {
 	g.Meta `path:"/user/{Id}" tags:"user" method:"delete" summary:"delete a user by id"`
-	Id     int64
+	Id     int64 `v:"required"`
 }
 type DeleteRes struct {
 }
@@ -27,14 +27,14 @@ type PageRes struct {
 	model.PageRes
 }
 type SaveReq struct {
-	do.Users
+	entity.Users
 	g.Meta `path:"/user/" tags:"user" method:"put" summary:"insert or update a user"`
 }
 type SaveRes struct {
 }
 type ResetPwdReq struct {
 	g.Meta `path:"/user/resetpwd" tags:"user" method:"post" summary:"reset password"`
-	Id     string
+	Id     string `v:"required"`
 }
 type ResetPwdRes struct {
 	NewPwd string

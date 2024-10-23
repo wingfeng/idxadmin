@@ -6,17 +6,16 @@ import (
 	"github.com/wingfeng/idxadmin/internal/dao"
 	"github.com/wingfeng/idxadmin/internal/logic/common"
 	"github.com/wingfeng/idxadmin/internal/model"
-	"github.com/wingfeng/idxadmin/internal/model/do"
 	"github.com/wingfeng/idxadmin/internal/model/entity"
 	"github.com/wingfeng/idxadmin/internal/service"
 )
 
 type sOrgUnit struct {
-	crud service.ICRUD[do.OrganizationUnits]
+	crud service.ICRUD[entity.OrganizationUnits]
 }
 
 func New() service.IOrgUnit {
-	crud := common.NewCRUD[do.OrganizationUnits]()
+	crud := common.NewCRUD[entity.OrganizationUnits]()
 	return &sOrgUnit{
 		crud: crud,
 	}
@@ -25,13 +24,13 @@ func init() {
 	service.RegisterOrgUnit(New())
 }
 
-func (s *sOrgUnit) Get(ctx context.Context, id int64) (do.OrganizationUnits, error) {
+func (s *sOrgUnit) Get(ctx context.Context, id int64) (entity.OrganizationUnits, error) {
 	return s.crud.Get(ctx, id)
 }
 func (s *sOrgUnit) Delete(ctx context.Context, id int64) error {
 	return s.crud.Delete(ctx, id)
 }
-func (s *sOrgUnit) Save(ctx context.Context, req do.OrganizationUnits) error {
+func (s *sOrgUnit) Save(ctx context.Context, req entity.OrganizationUnits) error {
 	return s.crud.Save(ctx, req)
 }
 func (s *sOrgUnit) List(ctx context.Context, req *model.PageReq) (*model.PageRes, error) {

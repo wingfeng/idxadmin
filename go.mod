@@ -16,6 +16,7 @@ require (
 	github.com/fsnotify/fsnotify v1.7.0 // indirect
 	github.com/go-logr/logr v1.2.4 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
+	github.com/gogf/gf v1.16.9 // indirect
 	github.com/gogf/gf/contrib/drivers/pgsql/v2 v2.7.4 // indirect
 	github.com/gorilla/websocket v1.5.1 // indirect
 	github.com/grokify/html-strip-tags-go v0.1.0 // indirect

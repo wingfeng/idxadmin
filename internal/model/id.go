@@ -1,7 +1,6 @@
 package model
 
 import (
-	"fmt"
 	"strconv"
 )
 
@@ -19,9 +18,7 @@ func (f ID) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON converts a json byte array of a snowflake ID into an ID type.
 func (f *ID) UnmarshalJSON(b []byte) error {
-	if len(b) < 3 {
-		return fmt.Errorf("invalid ID %q", string(b))
-	}
+
 	if b[0] == '"' && b[len(b)-1] != '"' {
 		i, err := strconv.ParseInt(string(b[1:len(b)-1]), 10, 64)
 		if err != nil {
@@ -40,4 +37,9 @@ func (f *ID) UnmarshalJSON(b []byte) error {
 		return nil
 	}
 
+}
+
+func (f *ID) String() string {
+	str := strconv.FormatInt(int64(*f), 10)
+	return str
 }

@@ -2,12 +2,14 @@ package client
 
 import (
 	"context"
+	"database/sql"
 	"fmt"
 
 	"log/slog"
 
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/os/gtime"
+	"github.com/gogf/gf/v2/util/gconv"
 	"github.com/wingfeng/idx-oauth2/utils"
 	v1 "github.com/wingfeng/idxadmin/api/client/v1"
 	"github.com/wingfeng/idxadmin/internal/dao"
@@ -30,12 +32,12 @@ func New() service.IClient {
 }
 
 // Get one client by id.
-func (s *sClient) Get(ctx context.Context, id int) (*do.Clients, error) {
+func (s *sClient) Get(ctx context.Context, id int) (*entity.Clients, error) {
 
 	if row, err := dao.Clients.Ctx(ctx).One("id=?", id); err != nil {
 		return nil, err
 	} else {
-		result := &do.Clients{}
+		result := &entity.Clients{}
 		err = row.Struct(result)
 		return result, err
 	}
@@ -54,11 +56,19 @@ func (s *sClient) List(ctx context.Context, req v1.PageReq) (*v1.PageRes, error)
 	return res, err
 }
 func (s *sClient) Save(ctx context.Context, req v1.SaveReq) (err error) {
-
-	result, err := dao.Clients.Ctx(ctx).OnConflict("id").Save(req.Clients)
-	if ra, er := result.RowsAffected(); ra == 0 || er != nil {
-		return fmt.Errorf("save error ,no rows affected %s", er)
+	var result sql.Result
+	if req.Clients.Id == 0 {
+		newObj := &do.Clients{}
+		gconv.Struct(req.Clients, newObj)
+		newObj.Id = nil
+		result, err = dao.Clients.Ctx(ctx).Insert(newObj)
+	} else {
+		result, err = dao.Clients.Ctx(ctx).OnConflict("id").Save(req.Clients)
 	}
+	g.Log().Info(ctx, "sql result:", "result:", result)
+	// if ra, er := result.RowsAffected(); ra == 0 || er != nil {
+	// 	return fmt.Errorf("save error ,no rows affected %s", er)
+	// }
 	return err
 }
 func (s *sClient) Delete(ctx context.Context, req *v1.DeleteReq) (err error) {
@@ -87,13 +97,13 @@ func (s *sClient) GenerateSecret(ctx context.Context, req *v1.GenerateSecretReq)
 	// 	Name:       req.Name,
 	// 	Expiration: gtime.New(req.Expiration),
 	// }
-	newSecrets := &entity.ClientSecrets{
+	newSecrets := &do.ClientSecrets{
 		ClientId:   req.ClientId,
 		Value:      newHash,
 		Name:       req.Name,
 		Expiration: gtime.New(req.Expiration),
 	}
-	_, err = dao.ClientSecrets.Ctx(ctx).OmitEmptyData().InsertAndGetId(newSecrets)
+	_, err = dao.ClientSecrets.Ctx(ctx).Insert(newSecrets)
 	if err != nil {
 		return "", err
 	}

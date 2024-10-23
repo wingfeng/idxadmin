@@ -4,13 +4,14 @@ import (
 	"context"
 	"fmt"
 	"log/slog"
+	"strings"
 
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/wingfeng/idx-oauth2/utils"
 	v1 "github.com/wingfeng/idxadmin/api/user/v1"
 	"github.com/wingfeng/idxadmin/internal/dao"
 	"github.com/wingfeng/idxadmin/internal/logic/common"
-	"github.com/wingfeng/idxadmin/internal/model/do"
+	"github.com/wingfeng/idxadmin/internal/model/entity"
 	"github.com/wingfeng/idxadmin/internal/service"
 )
 
@@ -25,12 +26,12 @@ func New() service.IUser {
 	return &sUser{}
 }
 
-func (s *sUser) Get(ctx context.Context, id int64) (*do.Users, error) {
+func (s *sUser) Get(ctx context.Context, id int64) (*entity.Users, error) {
 	if row, err := dao.Users.Ctx(ctx).One("id", id); err != nil {
 		return nil, err
 	} else {
 
-		result := &do.Users{}
+		result := &entity.Users{}
 		err = row.Struct(result)
 		return result, err
 	}
@@ -41,8 +42,12 @@ func (s *sUser) Delete(ctx context.Context, id int64) error {
 }
 
 func (s *sUser) Save(ctx context.Context, req v1.SaveReq) (err error) {
-
-	result, err := dao.Users.Ctx(ctx).OnConflict("id").OmitEmptyData().Save(req.Users)
+	req.Users.NormalizedAccount = strings.ToUpper(req.Account)
+	req.Users.NormalizedEmail = strings.ToUpper(req.Email)
+	result, err := dao.Users.Ctx(ctx).OnConflict("id").Save(req.Users)
+	if err != nil {
+		return err
+	}
 	if ra, er := result.RowsAffected(); ra == 0 || er != nil {
 		return fmt.Errorf("save error ,no rows affected %s", er)
 	}
@@ -50,7 +55,7 @@ func (s *sUser) Save(ctx context.Context, req v1.SaveReq) (err error) {
 }
 func (s *sUser) List(ctx context.Context, req v1.PageReq) (*v1.PageRes, error) {
 
-	items := make([]do.Users, 0)
+	items := make([]entity.Users, 0)
 	count := 0
 	err := dao.Users.Ctx(ctx).Handler(common.Paginate(&req.PageReq)).ScanAndCount(&items, &count, true)
 	res := &v1.PageRes{}

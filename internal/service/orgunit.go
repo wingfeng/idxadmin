@@ -9,15 +9,14 @@ import (
 	"context"
 
 	"github.com/wingfeng/idxadmin/internal/model"
-	"github.com/wingfeng/idxadmin/internal/model/do"
 	"github.com/wingfeng/idxadmin/internal/model/entity"
 )
 
 type (
 	IOrgUnit interface {
-		Get(ctx context.Context, id int64) (do.OrganizationUnits, error)
+		Get(ctx context.Context, id int64) (entity.OrganizationUnits, error)
 		Delete(ctx context.Context, id int64) error
-		Save(ctx context.Context, req do.OrganizationUnits) error
+		Save(ctx context.Context, req entity.OrganizationUnits) error
 		List(ctx context.Context, req *model.PageReq) (*model.PageRes, error)
 		Tree(ctx context.Context) ([]*entity.OrganizationUnitsEx, error)
 	}

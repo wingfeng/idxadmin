@@ -3,7 +3,7 @@ package v1
 import (
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/wingfeng/idxadmin/internal/model"
-	"github.com/wingfeng/idxadmin/internal/model/do"
+	"github.com/wingfeng/idxadmin/internal/model/entity"
 )
 
 type TreeReq struct {
@@ -11,23 +11,23 @@ type TreeReq struct {
 }
 type TreeRes struct {
 	g.Meta `mime:"json/application"`
-	Items  []*do.OrganizationUnitsEx `json:"items"`
+	Items  []*entity.OrganizationUnitsEx `json:"items"`
 }
 type GetReq struct {
 	g.Meta `path:"/ou/{id}" tags:"organization unit" method:"get" summary:"get Organization info by id"`
-	Id     int64
+	Id     int64 `v:"required"`
 }
 type GetRes struct {
-	do.OrganizationUnits
+	entity.OrganizationUnits
 }
 type SaveReq struct {
 	g.Meta `path:"/ou/" tags:"organization unit" method:"put" summary:"insert or update a Organization"`
-	do.OrganizationUnits
+	entity.OrganizationUnits
 }
 type SaveRes struct {
 }
 type DeleteReq struct {
-	Id     int64
+	Id     int64 `v:"required"`
 	g.Meta `path:"/ou/{Id}" tags:"organization unit" method:"delete" summary:"delete a Organization by id"`
 }
 type DeleteRes struct {

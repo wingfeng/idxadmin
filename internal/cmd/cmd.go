@@ -8,6 +8,7 @@ import (
 	"github.com/gogf/gf/v2/os/gcmd"
 
 	"github.com/wingfeng/idxadmin/internal/controller/client"
+	"github.com/wingfeng/idxadmin/internal/controller/common"
 	"github.com/wingfeng/idxadmin/internal/controller/orgunit"
 	"github.com/wingfeng/idxadmin/internal/controller/user"
 )
@@ -31,6 +32,7 @@ var (
 				group.Bind(
 					user.NewV1(),
 					orgunit.NewV1(),
+					common.NewV1(),
 				)
 			})
 			s.Run()

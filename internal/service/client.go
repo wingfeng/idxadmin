@@ -9,14 +9,13 @@ import (
 	"context"
 
 	v1 "github.com/wingfeng/idxadmin/api/client/v1"
-	"github.com/wingfeng/idxadmin/internal/model/do"
 	"github.com/wingfeng/idxadmin/internal/model/entity"
 )
 
 type (
 	IClient interface {
 		// Get one client by id.
-		Get(ctx context.Context, id int) (*do.Clients, error)
+		Get(ctx context.Context, id int) (*entity.Clients, error)
 		List(ctx context.Context, req v1.PageReq) (*v1.PageRes, error)
 		Save(ctx context.Context, req v1.SaveReq) (err error)
 		Delete(ctx context.Context, req *v1.DeleteReq) (err error)

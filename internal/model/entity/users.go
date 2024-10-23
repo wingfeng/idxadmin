@@ -16,11 +16,11 @@ type Users struct {
 	Ou                   string      `json:"ou"                   orm:"ou"                     description:""`
 	Account              string      `json:"account"              orm:"account"                description:""`
 	DisplayName          string      `json:"displayName"          orm:"display_name"           description:""`
-	NormalizedAccount    string      `json:"normalizedAccount"    orm:"normalized_account"     description:""`
+	NormalizedAccount    string      `json:"-"    orm:"normalized_account"     description:""`
 	Email                string      `json:"email"                orm:"email"                  description:""`
-	NormalizedEmail      string      `json:"normalizedEmail"      orm:"normalized_email"       description:""`
+	NormalizedEmail      string      `json:"-"      orm:"normalized_email"       description:""`
 	EmailConfirmed       bool        `json:"emailConfirmed"       orm:"email_confirmed"        description:""`
-	PasswordHash         string      `json:"passwordHash"         orm:"password_hash"          description:""`
+	PasswordHash         string      `json:"-"         orm:"password_hash"          description:""`
 	SecurityStamp        string      `json:"securityStamp"        orm:"security_stamp"         description:""`
 	PhoneNumber          string      `json:"phoneNumber"          orm:"phone_number"           description:""`
 	PhoneNumberConfirmed bool        `json:"phoneNumberConfirmed" orm:"phone_number_confirmed" description:""`
