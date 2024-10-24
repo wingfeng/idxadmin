@@ -37,7 +37,11 @@ var (
 					)
 				})
 			})
-
+			s.SetIndexFolder(true)
+			s.AddStaticPath("/ui", "E:\\gowork\\adminui\\apps\\web-antd\\dist")
+			// s.BindHandler("GET:/ui/*", func(r *ghttp.Request){
+			// 	r.Response.Writef()
+			// })
 			s.Run()
 			return nil
 		},
