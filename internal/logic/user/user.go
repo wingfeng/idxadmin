@@ -9,6 +9,7 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/wingfeng/idx-oauth2/utils"
 	v1 "github.com/wingfeng/idxadmin/api/user/v1"
+	"github.com/wingfeng/idxadmin/internal/consts"
 	"github.com/wingfeng/idxadmin/internal/dao"
 	"github.com/wingfeng/idxadmin/internal/logic/common"
 	"github.com/wingfeng/idxadmin/internal/model/entity"
@@ -44,6 +45,10 @@ func (s *sUser) Delete(ctx context.Context, id int64) error {
 func (s *sUser) Save(ctx context.Context, req v1.SaveReq) (err error) {
 	req.Users.NormalizedAccount = strings.ToUpper(req.Account)
 	req.Users.NormalizedEmail = strings.ToUpper(req.Email)
+	sub := ctx.Value(consts.SUBJECT_KEY)
+	account := ctx.Value(consts.ACCOUNT_KEY)
+	req.Updator = account.(string)
+	req.UpdatorId = sub.(string)
 	result, err := dao.Users.Ctx(ctx).OnConflict("id").Save(req.Users)
 	if err != nil {
 		return err

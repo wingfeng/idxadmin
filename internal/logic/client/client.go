@@ -12,6 +12,7 @@ import (
 	"github.com/gogf/gf/v2/util/gconv"
 	"github.com/wingfeng/idx-oauth2/utils"
 	v1 "github.com/wingfeng/idxadmin/api/client/v1"
+	"github.com/wingfeng/idxadmin/internal/consts"
 	"github.com/wingfeng/idxadmin/internal/dao"
 	"github.com/wingfeng/idxadmin/internal/logic/common"
 	"github.com/wingfeng/idxadmin/internal/model/do"
@@ -44,7 +45,7 @@ func (s *sClient) Get(ctx context.Context, id int) (*entity.Clients, error) {
 
 }
 func (s *sClient) List(ctx context.Context, req v1.PageReq) (*v1.PageRes, error) {
-	g.Log().Info(ctx, "req", req)
+
 	items := make([]entity.Clients, 0)
 	count := 0
 	err := dao.Clients.Ctx(ctx).Handler(common.Paginate(&req.PageReq)).ScanAndCount(&items, &count, true)
@@ -57,12 +58,18 @@ func (s *sClient) List(ctx context.Context, req v1.PageReq) (*v1.PageRes, error)
 }
 func (s *sClient) Save(ctx context.Context, req v1.SaveReq) (err error) {
 	var result sql.Result
+	sub := ctx.Value(consts.SUBJECT_KEY)
+	account := ctx.Value(consts.ACCOUNT_KEY)
 	if req.Clients.Id == 0 {
 		newObj := &do.Clients{}
 		gconv.Struct(req.Clients, newObj)
+		newObj.Creator = account
+		newObj.CreatorId = sub
 		newObj.Id = nil
 		result, err = dao.Clients.Ctx(ctx).Insert(newObj)
 	} else {
+		req.UpdatorId = sub.(string)
+		req.Updator = account.(string)
 		result, err = dao.Clients.Ctx(ctx).OnConflict("id").Save(req.Clients)
 	}
 	g.Log().Info(ctx, "sql result:", "result:", result)

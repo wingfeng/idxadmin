@@ -11,6 +11,7 @@ import (
 	"github.com/wingfeng/idxadmin/internal/controller/common"
 	"github.com/wingfeng/idxadmin/internal/controller/orgunit"
 	"github.com/wingfeng/idxadmin/internal/controller/user"
+	"github.com/wingfeng/idxadmin/internal/middleware"
 )
 
 var (
@@ -20,21 +21,23 @@ var (
 		Brief: "start http server",
 		Func: func(ctx context.Context, parser *gcmd.Parser) (err error) {
 			s := g.Server()
-			s.Group("/api/v1/oauth2", func(group *ghttp.RouterGroup) {
+			s.Group("/api/v1", func(group *ghttp.RouterGroup) {
 				group.Middleware(ghttp.MiddlewareHandlerResponse)
-				group.Bind(
+				group.Middleware(middleware.OidcAuth)
+				group.Group("/oauth2", func(group *ghttp.RouterGroup) {
+					group.Bind(
+						client.NewV1(),
+					)
+				})
+				group.Group("/system", func(group *ghttp.RouterGroup) {
+					group.Bind(
+						user.NewV1(),
+						orgunit.NewV1(),
+						common.NewV1(),
+					)
+				})
+			})
 
-					client.NewV1(),
-				)
-			})
-			s.Group("/api/v1/system", func(group *ghttp.RouterGroup) {
-				group.Middleware(ghttp.MiddlewareHandlerResponse)
-				group.Bind(
-					user.NewV1(),
-					orgunit.NewV1(),
-					common.NewV1(),
-				)
-			})
 			s.Run()
 			return nil
 		},
