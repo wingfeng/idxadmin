@@ -33,23 +33,23 @@ type Clients struct {
 	BackChannelLogoutUri              string      `json:"backChannelLogoutUri"              orm:"back_channel_logout_uri"                description:""`
 	BackChannelLogoutSessionRequired  bool        `json:"backChannelLogoutSessionRequired"  orm:"back_channel_logout_session_required"   description:""`
 	AllowOfflineAccess                bool        `json:"allowOfflineAccess"                orm:"allow_offline_access"                   description:""`
-	IdentityTokenLifetime             int64       `json:"identityTokenLifetime"             orm:"identity_token_lifetime"                description:""`
-	AccessTokenLifetime               int64       `json:"accessTokenLifetime"               orm:"access_token_lifetime"                  description:""`
-	AuthorizationCodeLifetime         int64       `json:"authorizationCodeLifetime"         orm:"authorization_code_lifetime"            description:""`
-	ConsentLifetime                   int64       `json:"consentLifetime"                   orm:"consent_lifetime"                       description:""`
-	AbsoluteRefreshTokenLifetime      int64       `json:"absoluteRefreshTokenLifetime"      orm:"absolute_refresh_token_lifetime"        description:""`
-	SlidingRefreshTokenLifetime       int64       `json:"slidingRefreshTokenLifetime"       orm:"sliding_refresh_token_lifetime"         description:""`
-	RefreshTokenUsage                 int64       `json:"refreshTokenUsage"                 orm:"refresh_token_usage"                    description:""`
+	IdentityTokenLifetime             ID          `json:"identityTokenLifetime"             orm:"identity_token_lifetime"                description:""`
+	AccessTokenLifetime               ID          `json:"accessTokenLifetime"               orm:"access_token_lifetime"                  description:""`
+	AuthorizationCodeLifetime         ID          `json:"authorizationCodeLifetime"         orm:"authorization_code_lifetime"            description:""`
+	ConsentLifetime                   ID          `json:"consentLifetime"                   orm:"consent_lifetime"                       description:""`
+	AbsoluteRefreshTokenLifetime      ID          `json:"absoluteRefreshTokenLifetime"      orm:"absolute_refresh_token_lifetime"        description:""`
+	SlidingRefreshTokenLifetime       ID          `json:"slidingRefreshTokenLifetime"       orm:"sliding_refresh_token_lifetime"         description:""`
+	RefreshTokenUsage                 ID          `json:"refreshTokenUsage"                 orm:"refresh_token_usage"                    description:""`
 	UpdateAccessTokenClaimsOnRefresh  bool        `json:"updateAccessTokenClaimsOnRefresh"  orm:"update_access_token_claims_on_refresh"  description:""`
-	RefreshTokenExpiration            int64       `json:"refreshTokenExpiration"            orm:"refresh_token_expiration"               description:""`
+	RefreshTokenExpiration            ID          `json:"refreshTokenExpiration"            orm:"refresh_token_expiration"               description:""`
 	EnableLocalLogin                  bool        `json:"enableLocalLogin"                  orm:"enable_local_login"                     description:""`
 	AlwaysSendClientClaims            bool        `json:"alwaysSendClientClaims"            orm:"always_send_client_claims"              description:""`
 	ClientClaimsPrefix                string      `json:"clientClaimsPrefix"                orm:"client_claims_prefix"                   description:""`
 	PairWiseSubjectSalt               string      `json:"pairWiseSubjectSalt"               orm:"pair_wise_subject_salt"                 description:""`
-	UserSsoLifetime                   int64       `json:"userSsoLifetime"                   orm:"user_sso_lifetime"                      description:""`
+	UserSsoLifetime                   ID          `json:"userSsoLifetime"                   orm:"user_sso_lifetime"                      description:""`
 	Claims                            *gjson.Json `json:"claims"                            orm:"claims"                                 description:""`
 	Properties                        *gjson.Json `json:"properties"                        orm:"properties"                             description:""`
-	Id                                int64       `json:"id"                                orm:"id"                                     description:""`
+	Id                                ID          `json:"id"                                orm:"id"                                     description:""`
 	Creator                           string      `json:"creator"                           orm:"creator"                                description:""`
 	CreatorId                         string      `json:"creatorId"                         orm:"creator_id"                             description:""`
 	Updator                           string      `json:"updator"                           orm:"updator"                                description:""`

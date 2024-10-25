@@ -5,18 +5,13 @@
 package do
 
 import (
-	"github.com/gogf/gf/v2/encoding/gjson"
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/os/gtime"
 )
 
-// Scopes is the golang structure of table scopes for DAO operations like Where/Data.
-type Scopes struct {
-	g.Meta      `orm:"table:scopes, do:true"`
-	Enabled     interface{} //
-	Name        interface{} //
-	Description interface{} //
-	Properties  *gjson.Json //
+// Groups is the golang structure of table groups for DAO operations like Where/Data.
+type Groups struct {
+	g.Meta      `orm:"table:groups, do:true"`
 	Id          interface{} //
 	Creator     interface{} //
 	CreatorId   interface{} //
@@ -24,4 +19,6 @@ type Scopes struct {
 	UpdatorId   interface{} //
 	CreatedAt   *gtime.Time //
 	UpdatedAt   *gtime.Time //
+	Name        interface{} //
+	Description interface{} //
 }

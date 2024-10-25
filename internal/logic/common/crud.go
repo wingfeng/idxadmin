@@ -10,35 +10,35 @@ import (
 	"github.com/wingfeng/idxadmin/internal/service"
 )
 
-type sCRUD[do interface{}] struct {
+type sCRUD[entity interface{}] struct {
 }
 
-func New[do interface{}]() service.ICRUD[do] {
+func New[entity interface{}]() service.ICRUD[entity] {
 
-	return &sCRUD[do]{}
+	return &sCRUD[entity]{}
 }
 
-func NewCRUD[do interface{}]() *sCRUD[do] { return &sCRUD[do]{} }
+func NewCRUD[entity interface{}]() *sCRUD[entity] { return &sCRUD[entity]{} }
 
-func (s *sCRUD[do]) Get(ctx context.Context, id interface{}) (do, error) {
-	r := new(do)
+func (s *sCRUD[entity]) Get(ctx context.Context, id interface{}) (entity, error) {
+	r := new(entity)
 	ro, err := g.DB().Model(r).One("id=?", id)
 	ro.Struct(r)
 	return *r, err
 }
-func (s *sCRUD[do]) Delete(ctx context.Context, id interface{}) error {
-	r := new(do)
+func (s *sCRUD[entity]) Delete(ctx context.Context, id interface{}) error {
+	r := new(entity)
 	_, err := g.DB().Model(r).Delete("id=?", id)
 	return err
 }
-func (s *sCRUD[do]) Save(ctx context.Context, row do) error {
+func (s *sCRUD[entity]) Save(ctx context.Context, row entity) error {
 	_, err := g.DB().Model(row).OnConflict("id").Save(row)
 	return err
 }
-func (s *sCRUD[do]) List(ctx context.Context, req *model.PageReq) (*model.PageRes, error) {
-	items := make([]do, 0)
+func (s *sCRUD[entity]) List(ctx context.Context, req *model.PageReq) (*model.PageRes, error) {
+	items := make([]entity, 0)
 	count := 0
-	tx := g.DB().Model(new(do))
+	tx := g.DB().Model(new(entity))
 
 	err := tx.Handler(Paginate(req)).ScanAndCount(&items, &count, false)
 	res := &model.PageRes{}

@@ -11,10 +11,10 @@ import (
 // ClientSecrets is the golang structure for table client_secrets.
 type ClientSecrets struct {
 	Name       string      `json:"name"       orm:"name"       description:""`
-	Value      string      `json:"-"      orm:"value"      description:""`
+	Value      string      `json:"value"      orm:"value"      description:""`
 	Expiration *gtime.Time `json:"expiration" orm:"expiration" description:""`
-	ClientId   int64       `json:"clientId"   orm:"client_id"  description:""`
-	Id         int64       `json:"id"         orm:"id"         description:""`
+	ClientId   ID          `json:"clientId"   orm:"client_id"  description:""`
+	Id         ID          `json:"id"         orm:"id"         description:""`
 	Creator    string      `json:"creator"    orm:"creator"    description:""`
 	CreatorId  string      `json:"creatorId"  orm:"creator_id" description:""`
 	Updator    string      `json:"updator"    orm:"updator"    description:""`

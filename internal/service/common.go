@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/wingfeng/idxadmin/internal/model"
+	"github.com/wingfeng/idxadmin/internal/model/entity"
 )
 
 type (
@@ -21,7 +22,7 @@ func CRUD[do interface{}]() ICRUD[do] {
 
 type (
 	IUtils interface {
-		NewId(ctx context.Context) model.ID
+		NewId(ctx context.Context) entity.ID
 	}
 )
 

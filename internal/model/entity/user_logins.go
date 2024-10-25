@@ -13,7 +13,7 @@ type UserLogins struct {
 	LoginProvider       string      `json:"loginProvider"       orm:"login_provider"        description:""`
 	ProviderKey         string      `json:"providerKey"         orm:"provider_key"          description:""`
 	ProviderDisplayName string      `json:"providerDisplayName" orm:"provider_display_name" description:""`
-	UserId              int64       `json:"userId"              orm:"user_id"               description:""`
+	UserId              ID          `json:"userId"              orm:"user_id"               description:""`
 	Creator             string      `json:"creator"             orm:"creator"               description:""`
 	CreatorId           string      `json:"creatorId"           orm:"creator_id"            description:""`
 	Updator             string      `json:"updator"             orm:"updator"               description:""`

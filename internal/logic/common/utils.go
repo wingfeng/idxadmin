@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/wingfeng/idx/utils"
-	"github.com/wingfeng/idxadmin/internal/model"
+	"github.com/wingfeng/idxadmin/internal/model/entity"
 	"github.com/wingfeng/idxadmin/internal/service"
 )
 
@@ -16,7 +16,7 @@ func init() {
 func NewUtils() service.IUtils {
 	return &sUtils{}
 }
-func (s *sUtils) NewId(ctx context.Context) model.ID {
+func (s *sUtils) NewId(ctx context.Context) entity.ID {
 	id := utils.GeneratID()
-	return model.ID(id.Int64())
+	return entity.ID(id.Int64())
 }

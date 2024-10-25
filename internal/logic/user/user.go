@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"log/slog"
-	"strings"
 
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/wingfeng/idx-oauth2/utils"
@@ -43,8 +42,7 @@ func (s *sUser) Delete(ctx context.Context, id int64) error {
 }
 
 func (s *sUser) Save(ctx context.Context, req v1.SaveReq) (err error) {
-	req.Users.NormalizedAccount = strings.ToUpper(req.Account)
-	req.Users.NormalizedEmail = strings.ToUpper(req.Email)
+
 	sub := ctx.Value(consts.SUBJECT_KEY)
 	account := ctx.Value(consts.ACCOUNT_KEY)
 	req.Updator = account.(string)

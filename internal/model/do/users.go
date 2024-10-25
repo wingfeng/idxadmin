@@ -8,22 +8,18 @@ import (
 	"github.com/gogf/gf/v2/encoding/gjson"
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/os/gtime"
-	"github.com/wingfeng/idxadmin/internal/model"
 )
 
 // Users is the golang structure of table users for DAO operations like Where/Data.
 type Users struct {
 	g.Meta               `orm:"table:users, do:true"`
-	OuId                 model.ID //
+	OuId                 interface{} //
 	Ou                   interface{} //
-	Account              interface{} //
+	UserName             interface{} //
 	DisplayName          interface{} //
-	NormalizedAccount    interface{} //
 	Email                interface{} //
-	NormalizedEmail      interface{} //
 	EmailConfirmed       interface{} //
 	PasswordHash         interface{} //
-	SecurityStamp        interface{} //
 	PhoneNumber          interface{} //
 	PhoneNumberConfirmed interface{} //
 	TwoFactorEnabled     interface{} //
@@ -31,12 +27,12 @@ type Users struct {
 	LockoutEnd           *gtime.Time //
 	LockoutEnabled       interface{} //
 	AccessFailedCount    interface{} //
-	Id                   model.ID //
+	Claims               *gjson.Json //
+	Id                   interface{} //
 	Creator              interface{} //
-	CreatorId            model.ID //
+	CreatorId            interface{} //
 	Updator              interface{} //
 	UpdatorId            interface{} //
 	CreatedAt            *gtime.Time //
 	UpdatedAt            *gtime.Time //
-	Claims               *gjson.Json //
 }

@@ -22,14 +22,11 @@ type UsersDao struct {
 type UsersColumns struct {
 	OuId                 string //
 	Ou                   string //
-	Account              string //
+	UserName             string //
 	DisplayName          string //
-	NormalizedAccount    string //
 	Email                string //
-	NormalizedEmail      string //
 	EmailConfirmed       string //
 	PasswordHash         string //
-	SecurityStamp        string //
 	PhoneNumber          string //
 	PhoneNumberConfirmed string //
 	TwoFactorEnabled     string //
@@ -37,6 +34,7 @@ type UsersColumns struct {
 	LockoutEnd           string //
 	LockoutEnabled       string //
 	AccessFailedCount    string //
+	Claims               string //
 	Id                   string //
 	Creator              string //
 	CreatorId            string //
@@ -44,21 +42,17 @@ type UsersColumns struct {
 	UpdatorId            string //
 	CreatedAt            string //
 	UpdatedAt            string //
-	Claims               string //
 }
 
 // usersColumns holds the columns for table users.
 var usersColumns = UsersColumns{
 	OuId:                 "ou_id",
 	Ou:                   "ou",
-	Account:              "account",
+	UserName:             "user_name",
 	DisplayName:          "display_name",
-	NormalizedAccount:    "normalized_account",
 	Email:                "email",
-	NormalizedEmail:      "normalized_email",
 	EmailConfirmed:       "email_confirmed",
 	PasswordHash:         "password_hash",
-	SecurityStamp:        "security_stamp",
 	PhoneNumber:          "phone_number",
 	PhoneNumberConfirmed: "phone_number_confirmed",
 	TwoFactorEnabled:     "two_factor_enabled",
@@ -66,6 +60,7 @@ var usersColumns = UsersColumns{
 	LockoutEnd:           "lockout_end",
 	LockoutEnabled:       "lockout_enabled",
 	AccessFailedCount:    "access_failed_count",
+	Claims:               "claims",
 	Id:                   "id",
 	Creator:              "creator",
 	CreatorId:            "creator_id",
@@ -73,7 +68,6 @@ var usersColumns = UsersColumns{
 	UpdatorId:            "updator_id",
 	CreatedAt:            "created_at",
 	UpdatedAt:            "updated_at",
-	Claims:               "claims",
 }
 
 // NewUsersDao creates and returns a new DAO object for table data access.

@@ -4,8 +4,8 @@
 
 package entity
 
-// UserRoles is the golang structure for table user_roles.
-type UserRoles struct {
-	UserId ID `json:"userId" orm:"user_id" description:""`
-	RoleId ID `json:"roleId" orm:"role_id" description:""`
+// UserGroups is the golang structure for table user_groups.
+type UserGroups struct {
+	UserId  ID `json:"userId"  orm:"user_id"  description:""`
+	GroupId ID `json:"groupId" orm:"group_id" description:""`
 }

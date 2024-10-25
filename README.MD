@@ -1,4 +1,4 @@
-# GoFrame Template For SingleRepo
+# IDX(an open source IAM) Backend base on GoFrame
 
 Quick Start: 
-- https://goframe.org/pages/viewpage.action?pageId=1114399
+- https://github.com/wingfeng/idx

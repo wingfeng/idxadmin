@@ -13,3 +13,9 @@ gfcli:
         descriptionTag: true
         gJsonSupport: true
         noModelComment: true
+        typeMapping:
+          bigserial:
+            type: ID
+          int8:
+            type: ID
+    

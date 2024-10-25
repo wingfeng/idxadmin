@@ -44,7 +44,7 @@ func (s *sClient) Get(ctx context.Context, id int) (*entity.Clients, error) {
 	}
 
 }
-func (s *sClient) List(ctx context.Context, req v1.PageReq) (*v1.PageRes, error) {
+func (s *sClient) List(ctx context.Context, req *v1.PageReq) (*v1.PageRes, error) {
 
 	items := make([]entity.Clients, 0)
 	count := 0
@@ -56,7 +56,7 @@ func (s *sClient) List(ctx context.Context, req v1.PageReq) (*v1.PageRes, error)
 	res.List = items
 	return res, err
 }
-func (s *sClient) Save(ctx context.Context, req v1.SaveReq) (err error) {
+func (s *sClient) Save(ctx context.Context, req *v1.SaveReq) (err error) {
 	var result sql.Result
 	sub := ctx.Value(consts.SUBJECT_KEY)
 	account := ctx.Value(consts.ACCOUNT_KEY)

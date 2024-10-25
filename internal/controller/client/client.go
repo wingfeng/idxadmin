@@ -13,12 +13,12 @@ import (
 
 func (c *ControllerV1) Save(ctx context.Context, req *v1.SaveReq) (res *v1.SaveRes, err error) {
 
-	err = service.Client().Save(ctx, *req)
+	err = service.Client().Save(ctx, req)
 	return &v1.SaveRes{}, err
 }
 func (c *ControllerV1) Page(ctx context.Context, req *v1.PageReq) (res *v1.PageRes, err error) {
 
-	res, err = service.Client().List(ctx, *req)
+	res, err = service.Client().List(ctx, req)
 	return res, err
 }
 func (c *ControllerV1) Get(ctx context.Context, req *v1.GetReq) (res *v1.GetRes, err error) {

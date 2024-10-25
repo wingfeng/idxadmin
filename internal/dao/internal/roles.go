@@ -20,30 +20,30 @@ type RolesDao struct {
 
 // RolesColumns defines and stores column names for table roles.
 type RolesColumns struct {
-	Name           string //
-	NormalizedName string //
-	Claims         string //
-	Id             string //
-	Creator        string //
-	CreatorId      string //
-	Updator        string //
-	UpdatorId      string //
-	CreatedAt      string //
-	UpdatedAt      string //
+	Name        string //
+	Description string //
+	Claims      string //
+	Id          string //
+	Creator     string //
+	CreatorId   string //
+	Updator     string //
+	UpdatorId   string //
+	CreatedAt   string //
+	UpdatedAt   string //
 }
 
 // rolesColumns holds the columns for table roles.
 var rolesColumns = RolesColumns{
-	Name:           "name",
-	NormalizedName: "normalized_name",
-	Claims:         "claims",
-	Id:             "id",
-	Creator:        "creator",
-	CreatorId:      "creator_id",
-	Updator:        "updator",
-	UpdatorId:      "updator_id",
-	CreatedAt:      "created_at",
-	UpdatedAt:      "updated_at",
+	Name:        "name",
+	Description: "description",
+	Claims:      "claims",
+	Id:          "id",
+	Creator:     "creator",
+	CreatorId:   "creator_id",
+	Updator:     "updator",
+	UpdatorId:   "updator_id",
+	CreatedAt:   "created_at",
+	UpdatedAt:   "updated_at",
 }
 
 // NewRolesDao creates and returns a new DAO object for table data access.

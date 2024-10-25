@@ -2,6 +2,7 @@ package user
 
 import (
 	"context"
+	"strconv"
 	"testing"
 
 	_ "github.com/gogf/gf/contrib/drivers/pgsql/v2"
@@ -12,13 +13,15 @@ import (
 
 func TestResetPwd(t *testing.T) {
 	ctx := context.Background()
-	id := int64(1838872840128958465)
+	id := int64(1838872840128958464)
 	s := service.User()
-
+	idStr := strconv.Itoa(int(id))
 	u, _ := s.Get(ctx, id)
 	oldPwd := u.PasswordHash
 	t.Log(oldPwd)
-	s.ResetPwd(ctx, v1.ResetPwdReq{Id: "1838872840128958465"})
+	pwd, err := s.ResetPwd(ctx, v1.ResetPwdReq{Id: idStr})
+	gtest.AssertNil(err)
+	t.Log(pwd)
 	u, _ = s.Get(ctx, id)
 	newPwd := u.PasswordHash
 	t.Logf("%v", newPwd)

@@ -2,7 +2,6 @@ package common
 
 import (
 	"context"
-	"strings"
 	"testing"
 
 	"github.com/brianvoe/gofakeit/v7"
@@ -23,26 +22,25 @@ func TestCrud(t *testing.T) {
 	uName := gofakeit.Username()
 	email := gofakeit.Email()
 	u := &entity.Users{
-		Account:           uName,
-		NormalizedAccount: strings.ToUpper(uName),
+		UserName: uName,
 
-		Email:           email,
-		NormalizedEmail: strings.ToUpper(email),
-		DisplayName:     gofakeit.Name(),
+		Email: email,
+
+		DisplayName: gofakeit.Name(),
 
 		OuId:           1328680589330485249,
 		Ou:             "XX软件有限公司",
 		EmailConfirmed: true,
 	}
 	u.LockoutEnd = gtime.Now()
-	u.Id = model.ID(id)
+	u.Id = entity.ID(id)
 
 	s := NewCRUD[*entity.Users]()
 	err := s.Save(ctx, u)
 	gtest.AssertNil(err)
 	r, err := s.Get(ctx, id)
 	gtest.AssertNil(err)
-	gtest.Assert(r.Account, uName)
+	gtest.Assert(r.UserName, uName)
 	t.Logf("User %v", r)
 	err = s.Delete(ctx, id)
 	gtest.AssertNil(err)
