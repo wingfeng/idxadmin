@@ -18,11 +18,11 @@ type GetRes struct {
 	entity.Clients
 }
 
-type PageReq struct {
+type ListReq struct {
 	g.Meta `path:"/client/list" tags:"Client" method:"post" summary:"get a page of clients"`
 	model.PageReq
 }
-type PageRes struct {
+type ListRes struct {
 	g.Meta `mime:"json/application"`
 	model.PageRes
 }

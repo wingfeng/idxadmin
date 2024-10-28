@@ -7,6 +7,7 @@ import (
 	"github.com/wingfeng/idxadmin/internal/dao"
 	"github.com/wingfeng/idxadmin/internal/logic/common"
 	"github.com/wingfeng/idxadmin/internal/model"
+	"github.com/wingfeng/idxadmin/internal/model/do"
 	"github.com/wingfeng/idxadmin/internal/model/entity"
 	"github.com/wingfeng/idxadmin/internal/service"
 )
@@ -51,4 +52,19 @@ func (s *sRole) Members(ctx context.Context, req *v1.MembersReq) (*model.PageRes
 	res.Total = count
 	res.List = items
 	return res, err
+}
+
+func (s *sRole) AddMemeber(ctx context.Context, req *v1.AddMemberReq) error {
+	items := make([]*do.UserRoles, 0)
+	for _, v := range req.UserIds {
+		ur := &do.UserRoles{UserId: v, RoleId: req.Id}
+		items = append(items, ur)
+	}
+	_, err := dao.UserRoles.Ctx(ctx).OnConflict("role_id", "user_id").Save(items)
+	return err
+}
+
+func (s *sRole) RemoveMember(ctx context.Context, req *v1.RemoveMemberReq) error {
+	_, err := dao.UserRoles.Ctx(ctx).Delete("role_id=? and user_id in (?)", req.Id, req.UserIds)
+	return err
 }

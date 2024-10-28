@@ -16,7 +16,7 @@ type (
 	IClient interface {
 		// Get one client by id.
 		Get(ctx context.Context, id int) (*entity.Clients, error)
-		List(ctx context.Context, req *v1.PageReq) (*v1.PageRes, error)
+		List(ctx context.Context, req *v1.ListReq) (*v1.ListRes, error)
 		Save(ctx context.Context, req *v1.SaveReq) (err error)
 		Delete(ctx context.Context, req *v1.DeleteReq) (err error)
 		GenerateSecret(ctx context.Context, req *v1.GenerateSecretReq) (string, error)

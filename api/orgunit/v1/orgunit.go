@@ -32,10 +32,10 @@ type DeleteReq struct {
 }
 type DeleteRes struct {
 }
-type PageReq struct {
+type ListReq struct {
 	g.Meta `path:"/ou/list" tags:"organization unit" method:"post" summary:"get a page of Organizations"`
 	model.PageReq
 }
-type PageRes struct {
+type ListRes struct {
 	model.PageRes
 }

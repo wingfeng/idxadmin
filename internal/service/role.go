@@ -20,6 +20,8 @@ type (
 		List(ctx context.Context, req *v1.ListReq) (*model.PageRes, error)
 		Save(ctx context.Context, req *entity.Roles) error
 		Members(ctx context.Context, req *v1.MembersReq) (*model.PageRes, error)
+		AddMemeber(ctx context.Context, req *v1.AddMemberReq) error
+		RemoveMember(ctx context.Context, req *v1.RemoveMemberReq) error
 	}
 )
 

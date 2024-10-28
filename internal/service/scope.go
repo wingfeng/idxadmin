@@ -8,12 +8,17 @@ package service
 import (
 	"context"
 
-	v1 "github.com/wingfeng/idxadmin/api/orgunit/v1"
+	v1 "github.com/wingfeng/idxadmin/api/scope/v1"
+	"github.com/wingfeng/idxadmin/internal/model"
+	"github.com/wingfeng/idxadmin/internal/model/entity"
 )
 
 type (
 	IScope interface {
-		Get(ctx context.Context, _ v1.GetReq)
+		Get(ctx context.Context, id int64) (res *entity.Scopes, err error)
+		Delete(ctx context.Context, id int64) error
+		List(ctx context.Context, req *v1.ListReq) (*model.PageRes, error)
+		Save(ctx context.Context, req *v1.SaveReq) error
 	}
 )
 

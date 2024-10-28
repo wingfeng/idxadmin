@@ -44,12 +44,12 @@ func (s *sClient) Get(ctx context.Context, id int) (*entity.Clients, error) {
 	}
 
 }
-func (s *sClient) List(ctx context.Context, req *v1.PageReq) (*v1.PageRes, error) {
+func (s *sClient) List(ctx context.Context, req *v1.ListReq) (*v1.ListRes, error) {
 
 	items := make([]entity.Clients, 0)
 	count := 0
 	err := dao.Clients.Ctx(ctx).Handler(common.Paginate(&req.PageReq)).ScanAndCount(&items, &count, true)
-	res := &v1.PageRes{}
+	res := &v1.ListRes{}
 	res.PageSize = req.PageSize
 	res.Page = req.Page
 	res.Total = count

@@ -18,7 +18,7 @@ func (c *ControllerV1) Delete(ctx context.Context, req *v1.DeleteReq) (res *v1.D
 	err = service.User().Delete(ctx, req.Id)
 	return nil, err
 }
-func (c *ControllerV1) Page(ctx context.Context, req *v1.PageReq) (res *v1.PageRes, err error) {
+func (c *ControllerV1) List(ctx context.Context, req *v1.ListReq) (res *v1.ListRes, err error) {
 	res, err = service.User().List(ctx, *req)
 	return res, err
 }

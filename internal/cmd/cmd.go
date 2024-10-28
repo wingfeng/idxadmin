@@ -11,6 +11,7 @@ import (
 	"github.com/wingfeng/idxadmin/internal/controller/common"
 	"github.com/wingfeng/idxadmin/internal/controller/orgunit"
 	"github.com/wingfeng/idxadmin/internal/controller/role"
+	"github.com/wingfeng/idxadmin/internal/controller/scope"
 	"github.com/wingfeng/idxadmin/internal/controller/user"
 	"github.com/wingfeng/idxadmin/internal/middleware"
 )
@@ -28,6 +29,7 @@ var (
 				group.Group("/oauth2", func(group *ghttp.RouterGroup) {
 					group.Bind(
 						client.NewV1(),
+						scope.NewV1(),
 					)
 				})
 				group.Group("/system", func(group *ghttp.RouterGroup) {

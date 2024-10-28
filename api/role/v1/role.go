@@ -43,3 +43,17 @@ type MembersRes struct {
 	g.Meta `mime:"application/json" type:"object" example:"model.PageRes"`
 	model.PageRes
 }
+type AddMemberReq struct {
+	g.Meta  `path:"/role/{Id}/members" method:"put" tags:"Role" summary:"添加角色成员"`
+	Id      int64   `json:"id" v:"required#角色ID不能为空" dc:"角色ID"`
+	UserIds []int64 `json:"userIds" v:"required#用户ID不能为空" dc:"用户ID"`
+}
+type AddMemberRes struct {
+}
+type RemoveMemberReq struct {
+	g.Meta  `path:"/role/{Id}/members" method:"delete" tags:"Role" summary:"删除角色成员"`
+	Id      int64   `json:"id" v:"required#角色ID不能为空" dc:"角色ID"`
+	UserIds []int64 `json:"userIds" v:"required#用户ID不能为空" dc:"用户ID"`
+}
+type RemoveMemberRes struct {
+}

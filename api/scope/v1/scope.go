@@ -19,11 +19,11 @@ type SaveReq struct {
 }
 type SaveRes struct {
 }
-type PageReq struct {
+type ListReq struct {
 	g.Meta `path:"/scope/list" tags:"scope" method:"post" summary:"get a page of scopes"`
 	model.PageReq
 }
-type PageRes struct {
+type ListRes struct {
 	model.PageRes
 }
 type DeleteReq struct {

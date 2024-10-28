@@ -19,11 +19,11 @@ type DeleteReq struct {
 }
 type DeleteRes struct {
 }
-type PageReq struct {
+type ListReq struct {
 	g.Meta `path:"/user/list" tags:"user" method:"post" summary:"get a page of users"`
 	model.PageReq
 }
-type PageRes struct {
+type ListRes struct {
 	model.PageRes
 }
 type SaveReq struct {

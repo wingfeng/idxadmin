@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log/slog"
+	"strings"
 
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/wingfeng/idx-oauth2/utils"
@@ -45,8 +46,11 @@ func (s *sUser) Save(ctx context.Context, req v1.SaveReq) (err error) {
 
 	sub := ctx.Value(consts.SUBJECT_KEY)
 	account := ctx.Value(consts.ACCOUNT_KEY)
-	req.Updator = account.(string)
-	req.UpdatorId = sub.(string)
+	if account != nil && sub != nil {
+		req.Updator = account.(string)
+		req.UpdatorId = sub.(string)
+	}
+	req.UserName = strings.ToLower(req.UserName)
 	result, err := dao.Users.Ctx(ctx).OnConflict("id").Save(req.Users)
 	if err != nil {
 		return err
@@ -56,12 +60,12 @@ func (s *sUser) Save(ctx context.Context, req v1.SaveReq) (err error) {
 	}
 	return err
 }
-func (s *sUser) List(ctx context.Context, req v1.PageReq) (*v1.PageRes, error) {
+func (s *sUser) List(ctx context.Context, req v1.ListReq) (*v1.ListRes, error) {
 
 	items := make([]entity.Users, 0)
 	count := 0
 	err := dao.Users.Ctx(ctx).Handler(common.Paginate(&req.PageReq)).ScanAndCount(&items, &count, true)
-	res := &v1.PageRes{}
+	res := &v1.ListRes{}
 	res.PageSize = req.PageSize
 	res.Page = req.Page
 	res.Total = count

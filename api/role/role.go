@@ -16,4 +16,6 @@ type IRoleV1 interface {
 	Save(ctx context.Context, req *v1.SaveReq) (res *v1.SaveRes, err error)
 	Delete(ctx context.Context, req *v1.DeleteReq) (res *v1.DeleteRes, err error)
 	Members(ctx context.Context, req *v1.MembersReq) (res *v1.MembersRes, err error)
+	AddMember(ctx context.Context, req *v1.AddMemberReq) (res *v1.AddMemberRes, err error)
+	RemoveMember(ctx context.Context, req *v1.RemoveMemberReq) (res *v1.RemoveMemberRes, err error)
 }

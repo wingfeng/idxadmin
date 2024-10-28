@@ -33,3 +33,9 @@ func (c *ControllerV1) Members(ctx context.Context, req *v1.MembersReq) (res *v1
 		PageRes: *p,
 	}, err
 }
+func (c *ControllerV1) AddMember(ctx context.Context, req *v1.AddMemberReq) (res *v1.AddMemberRes, err error) {
+	return nil, service.Role().AddMemeber(ctx, req)
+}
+func (c *ControllerV1) RemoveMember(ctx context.Context, req *v1.RemoveMemberReq) (res *v1.RemoveMemberRes, err error) {
+	return nil, service.Role().RemoveMember(ctx, req)
+}

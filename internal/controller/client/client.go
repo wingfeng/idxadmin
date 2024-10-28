@@ -16,7 +16,7 @@ func (c *ControllerV1) Save(ctx context.Context, req *v1.SaveReq) (res *v1.SaveR
 	err = service.Client().Save(ctx, req)
 	return &v1.SaveRes{}, err
 }
-func (c *ControllerV1) Page(ctx context.Context, req *v1.PageReq) (res *v1.PageRes, err error) {
+func (c *ControllerV1) List(ctx context.Context, req *v1.ListReq) (res *v1.ListRes, err error) {
 
 	res, err = service.Client().List(ctx, req)
 	return res, err

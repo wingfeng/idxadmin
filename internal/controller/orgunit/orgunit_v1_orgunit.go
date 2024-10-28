@@ -29,10 +29,10 @@ func (c *ControllerV1) Save(ctx context.Context, req *v1.SaveReq) (res *v1.SaveR
 func (c *ControllerV1) Delete(ctx context.Context, req *v1.DeleteReq) (res *v1.DeleteRes, err error) {
 	return nil, gerror.NewCode(gcode.CodeNotImplemented)
 }
-func (c *ControllerV1) Page(ctx context.Context, req *v1.PageReq) (res *v1.PageRes, err error) {
+func (c *ControllerV1) List(ctx context.Context, req *v1.ListReq) (res *v1.ListRes, err error) {
 	r, err := service.OrgUnit().List(ctx, &req.PageReq)
 	//	gconv.Scan(res, r)
-	return &v1.PageRes{
+	return &v1.ListRes{
 		PageRes: *r,
 	}, err
 }
