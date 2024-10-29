@@ -7,20 +7,20 @@ import (
 )
 
 type GetReq struct {
-	g.Meta `path:"/scope/{id}" tags:"scope" method:"get" summary:"get scope info by id"`
+	g.Meta `path:"/scope/{id}" tags:"Scope" method:"get" summary:"get scope info by id"`
 	Id     int64
 }
 type GetRes struct {
 	entity.Scopes
 }
 type SaveReq struct {
-	g.Meta `path:"/scope/" tags:"scope" method:"put" summary:"insert or update a scope"`
+	g.Meta `path:"/scope/" tags:"Scope" method:"put" summary:"insert or update a scope"`
 	entity.Scopes
 }
 type SaveRes struct {
 }
 type ListReq struct {
-	g.Meta `path:"/scope/list" tags:"scope" method:"post" summary:"get a page of scopes"`
+	g.Meta `path:"/scope/list" tags:"Scope" method:"post" summary:"get a page of scopes"`
 	model.PageReq
 }
 type ListRes struct {
@@ -28,7 +28,7 @@ type ListRes struct {
 }
 type DeleteReq struct {
 	Id     int64
-	g.Meta `path:"/scope/{Id}" tags:"scope" method:"delete" summary:"delete a scope by id"`
+	g.Meta `path:"/scope/{Id}" tags:"Scope" method:"delete" summary:"delete a scope by id"`
 }
 type DeleteRes struct {
 }

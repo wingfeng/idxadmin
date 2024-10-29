@@ -7,20 +7,20 @@ import (
 )
 
 type GetReq struct {
-	g.Meta `path:"/user/{id}" tags:"user" method:"get" summary:"get client info by id"`
+	g.Meta `path:"/user/{id}" tags:"User" method:"get" summary:"get client info by id"`
 	Id     int64 `v:"required"`
 }
 type GetRes struct {
 	entity.Users
 }
 type DeleteReq struct {
-	g.Meta `path:"/user/{Id}" tags:"user" method:"delete" summary:"delete a user by id"`
+	g.Meta `path:"/user/{Id}" tags:"User" method:"delete" summary:"delete a user by id"`
 	Id     int64 `v:"required"`
 }
 type DeleteRes struct {
 }
 type ListReq struct {
-	g.Meta `path:"/user/list" tags:"user" method:"post" summary:"get a page of users"`
+	g.Meta `path:"/user/list" tags:"User" method:"post" summary:"get a page of users"`
 	model.PageReq
 }
 type ListRes struct {
@@ -28,12 +28,12 @@ type ListRes struct {
 }
 type SaveReq struct {
 	entity.Users
-	g.Meta `path:"/user/" tags:"user" method:"put" summary:"insert or update a user"`
+	g.Meta `path:"/user/" tags:"User" method:"put" summary:"insert or update a user"`
 }
 type SaveRes struct {
 }
 type ResetPwdReq struct {
-	g.Meta `path:"/user/resetpwd" tags:"user" method:"post" summary:"reset password"`
+	g.Meta `path:"/user/resetpwd" tags:"User" method:"post" summary:"reset password"`
 	Id     string `v:"required"`
 }
 type ResetPwdRes struct {

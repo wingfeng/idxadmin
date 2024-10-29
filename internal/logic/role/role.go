@@ -3,6 +3,7 @@ package role
 import (
 	"context"
 
+	"github.com/gogf/gf/v2/database/gdb"
 	v1 "github.com/wingfeng/idxadmin/api/role/v1"
 	"github.com/wingfeng/idxadmin/internal/dao"
 	"github.com/wingfeng/idxadmin/internal/logic/common"
@@ -27,7 +28,15 @@ func New() service.IRole {
 }
 
 func (s *sRole) Delete(ctx context.Context, id int64) error {
-	return s.crud.Delete(ctx, id)
+	err := dao.Roles.DB().Transaction(context.TODO(), func(ctx context.Context, tx gdb.TX) error {
+		_, err := tx.Ctx(ctx).Model(&entity.UserRoles{}).Delete("role_id=?", id)
+		if err != nil {
+			return err
+		}
+		_, err = tx.Ctx(ctx).Model(&entity.Roles{}).Delete("id=?", id)
+		return err
+	})
+	return err
 }
 
 func (s *sRole) Get(ctx context.Context, id int64) (entity.Roles, error) {

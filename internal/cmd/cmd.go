@@ -9,6 +9,7 @@ import (
 
 	"github.com/wingfeng/idxadmin/internal/controller/client"
 	"github.com/wingfeng/idxadmin/internal/controller/common"
+	ggroup "github.com/wingfeng/idxadmin/internal/controller/group"
 	"github.com/wingfeng/idxadmin/internal/controller/orgunit"
 	"github.com/wingfeng/idxadmin/internal/controller/role"
 	"github.com/wingfeng/idxadmin/internal/controller/scope"
@@ -38,6 +39,7 @@ var (
 						orgunit.NewV1(),
 						common.NewV1(),
 						role.NewV1(),
+						ggroup.NewV1(),
 					)
 				})
 			})
