@@ -2,6 +2,7 @@ package role
 
 import (
 	"context"
+	"strings"
 
 	"github.com/gogf/gf/v2/database/gdb"
 	v1 "github.com/wingfeng/idxadmin/api/role/v1"
@@ -47,6 +48,7 @@ func (s *sRole) List(ctx context.Context, req *v1.ListReq) (*model.PageRes, erro
 	return s.crud.List(ctx, &req.PageReq)
 }
 func (s *sRole) Save(ctx context.Context, req *entity.Roles) error {
+	req.Name = strings.ToLower(req.Name)
 	return s.crud.Save(ctx, *req)
 }
 func (s *sRole) Members(ctx context.Context, req *v1.MembersReq) (*model.PageRes, error) {

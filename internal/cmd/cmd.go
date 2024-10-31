@@ -2,11 +2,14 @@ package cmd
 
 import (
 	"context"
+	"path"
+	"strings"
 
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/net/ghttp"
 	"github.com/gogf/gf/v2/os/gcmd"
 
+	"github.com/wingfeng/idxadmin/internal/conf"
 	"github.com/wingfeng/idxadmin/internal/controller/client"
 	"github.com/wingfeng/idxadmin/internal/controller/common"
 	ggroup "github.com/wingfeng/idxadmin/internal/controller/group"
@@ -43,21 +46,20 @@ var (
 					)
 				})
 			})
+			options := conf.GetOptions(ctx)
+			if options.EnabledUI {
+				s.AddStaticPath("/ui", options.UIPath)
 
-			// enabled, _ := g.Cfg().Get(ctx, "ui.enabled")
-			// if enabled.Bool() {
-			// 	distPath, _ := g.Cfg().Get(ctx, "ui.path")
-			// 	s.AddStaticPath("/ui", distPath)
-			// }
-			// distPath := "c:\\workspace\\gowork\\adminui\\apps\\web-antd\\dist"
-			// s.AddStaticPath("/ui", distPath)
-			// s.BindHandler("GET:/ui/*", func(r *ghttp.Request) {
-			// 	ext := path.Ext(r.URL.Path)
-			// 	if strings.EqualFold(ext, "") {
-			// 		r.Response.ServeFile(path.Join(distPath, "index.html"))
-			// 	}
+				s.AddStaticPath("/ui", options.UIPath)
+				s.BindHandler("GET:/ui/*", func(r *ghttp.Request) {
+					ext := path.Ext(r.URL.Path)
+					if strings.EqualFold(ext, "") {
+						r.Response.ServeFile(path.Join(options.UIPath, "index.html"))
+					}
 
-			// })
+				})
+			}
+
 			s.Run()
 			return nil
 		},

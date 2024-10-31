@@ -10,6 +10,7 @@ import (
 
 	"github.com/MicahParks/keyfunc/v3"
 	"github.com/golang-jwt/jwt/v5"
+	"github.com/wingfeng/idxadmin/internal/conf"
 	"github.com/wingfeng/idxadmin/internal/consts"
 
 	"github.com/gogf/gf/v2/frame/g"
@@ -24,11 +25,9 @@ var (
 func getKey(ctx context.Context) keyfunc.Keyfunc {
 
 	once.Do(func() {
-		url, err := g.Cfg().Get(context.Background(), "jwt.jwkurl")
-		if err != nil {
-			log.Fatalf("get config jwks URL failed.\nError: %s", err)
-		}
-		k, err := keyfunc.NewDefaultCtx(ctx, []string{url.String()}) // Context is used to end the refresh goroutine.
+		url := conf.GetOptions(ctx).JWKsUrl
+
+		k, err := keyfunc.NewDefaultCtx(ctx, []string{url}) // Context is used to end the refresh goroutine.
 		if err != nil {
 			log.Fatalf("Failed to create a keyfunc.Keyfunc from the server's URL.\nError: %s", err)
 		}
