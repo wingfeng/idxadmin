@@ -16,9 +16,9 @@ type (
 	IUser interface {
 		Get(ctx context.Context, id int64) (*entity.Users, error)
 		Delete(ctx context.Context, id int64) error
-		Save(ctx context.Context, req v1.SaveReq) (err error)
-		List(ctx context.Context, req v1.ListReq) (*v1.ListRes, error)
-		ResetPwd(ctx context.Context, req v1.ResetPwdReq) (string, error)
+		Save(ctx context.Context, req *v1.SaveReq) (err error)
+		List(ctx context.Context, req *v1.ListReq) (*v1.ListRes, error)
+		ResetPwd(ctx context.Context, req *v1.ResetPwdReq) (string, error)
 	}
 )
 

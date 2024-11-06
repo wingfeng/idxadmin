@@ -19,15 +19,15 @@ func (c *ControllerV1) Delete(ctx context.Context, req *v1.DeleteReq) (res *v1.D
 	return nil, err
 }
 func (c *ControllerV1) List(ctx context.Context, req *v1.ListReq) (res *v1.ListRes, err error) {
-	res, err = service.User().List(ctx, *req)
+	res, err = service.User().List(ctx, req)
 	return res, err
 }
 func (c *ControllerV1) Save(ctx context.Context, req *v1.SaveReq) (res *v1.SaveRes, err error) {
-	err = service.User().Save(ctx, *req)
+	err = service.User().Save(ctx, req)
 	return nil, err
 }
 func (c *ControllerV1) ResetPwd(ctx context.Context, req *v1.ResetPwdReq) (res *v1.ResetPwdRes, err error) {
-	newpwd, err := service.User().ResetPwd(ctx, *req)
+	newpwd, err := service.User().ResetPwd(ctx, req)
 	return &v1.ResetPwdRes{
 		NewPwd: newpwd,
 	}, err

@@ -22,6 +22,7 @@ type (
 		GenerateSecret(ctx context.Context, req *v1.GenerateSecretReq) (string, error)
 		GetSecrets(ctx context.Context, req *v1.GetClientSecretsReq) ([]*entity.ClientSecrets, error)
 		DeleteSecret(ctx context.Context, req *v1.DeleteSecretReq) error
+		SetCORS(ctx context.Context, req *v1.SetCORSReq) error
 	}
 )
 

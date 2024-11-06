@@ -3,11 +3,11 @@ package user
 import (
 	"context"
 	"fmt"
-	"log/slog"
 	"strings"
 
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/wingfeng/idx-oauth2/utils"
+	idxConsts "github.com/wingfeng/idx/consts"
 	v1 "github.com/wingfeng/idxadmin/api/user/v1"
 	"github.com/wingfeng/idxadmin/internal/consts"
 	"github.com/wingfeng/idxadmin/internal/dao"
@@ -23,7 +23,7 @@ func init() {
 	service.RegisterUser(New())
 }
 func New() service.IUser {
-	slog.Info("Client service register")
+
 	return &sUser{}
 }
 
@@ -39,10 +39,11 @@ func (s *sUser) Get(ctx context.Context, id int64) (*entity.Users, error) {
 }
 func (s *sUser) Delete(ctx context.Context, id int64) error {
 	_, err := dao.Users.Ctx(ctx).Delete("id=?", id)
+	//todo: Clean Cache after reset;
 	return err
 }
 
-func (s *sUser) Save(ctx context.Context, req v1.SaveReq) (err error) {
+func (s *sUser) Save(ctx context.Context, req *v1.SaveReq) (err error) {
 
 	sub := ctx.Value(consts.SUBJECT_KEY)
 	account := ctx.Value(consts.ACCOUNT_KEY)
@@ -58,9 +59,11 @@ func (s *sUser) Save(ctx context.Context, req v1.SaveReq) (err error) {
 	if ra, er := result.RowsAffected(); ra == 0 || er != nil {
 		return fmt.Errorf("save error ,no rows affected %s", er)
 	}
+
+	//todo: Clean Cache after reset;
 	return err
 }
-func (s *sUser) List(ctx context.Context, req v1.ListReq) (*v1.ListRes, error) {
+func (s *sUser) List(ctx context.Context, req *v1.ListReq) (*v1.ListRes, error) {
 
 	items := make([]entity.Users, 0)
 	count := 0
@@ -72,12 +75,30 @@ func (s *sUser) List(ctx context.Context, req v1.ListReq) (*v1.ListRes, error) {
 	res.List = items
 	return res, err
 }
-func (s *sUser) ResetPwd(ctx context.Context, req v1.ResetPwdReq) (string, error) {
+func (s *sUser) ResetPwd(ctx context.Context, req *v1.ResetPwdReq) (string, error) {
 	newPwd := utils.GenerateRandomString(8)
 	newHash, _ := utils.HashPassword(newPwd)
 	result, err := dao.Users.Ctx(ctx).Data(g.Map{"password_hash": newHash,
 		"is_temporary_password": true}).Where("id=?", req.Id).Update()
 
 	g.Log().Info(ctx, "User Reset Password", "User", req.Id, "row affected", result)
+	if err == nil {
+
+		u, _ := dao.Users.Ctx(ctx).One("id=?", req.Id)
+		user := &entity.Users{}
+		u.Struct(user)
+		key := idxConsts.CONST_USERPWDHashKEY + user.UserName
+		_, err = common.Cache.Remove(ctx, key)
+		if err != nil {
+			g.Log().Error(ctx, "User Reset Password", "User", req.Id, "remove pwd cache", err)
+		}
+		key = idxConsts.CONST_USERNAMEKEY + user.UserName
+		_, err = common.Cache.Remove(ctx, key)
+		if err != nil {
+			g.Log().Error(ctx, "User Reset Password", "User", req.Id, "remove user cache", err)
+		}
+
+	}
+	//todo: Clean Cache after reset;
 	return newPwd, err
 }

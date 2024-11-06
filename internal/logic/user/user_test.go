@@ -19,7 +19,7 @@ func TestResetPwd(t *testing.T) {
 	u, _ := s.Get(ctx, id)
 	oldPwd := u.PasswordHash
 	t.Log(oldPwd)
-	pwd, err := s.ResetPwd(ctx, v1.ResetPwdReq{Id: idStr})
+	pwd, err := s.ResetPwd(ctx, &v1.ResetPwdReq{Id: idStr})
 	gtest.AssertNil(err)
 	t.Log(pwd)
 	u, _ = s.Get(ctx, id)

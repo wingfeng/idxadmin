@@ -61,3 +61,8 @@ type GetClientSecretsRes struct {
 	g.Meta  `mime:"json/application"`
 	Secrets []*entity.ClientSecrets
 }
+type SetCORSReq struct {
+	g.Meta   `path:"/client/cors" tags:"Client" method:"post" summary:"set client cors origins"`
+	ClientId entity.ID `v:"required"`
+	Origins  []string
+}

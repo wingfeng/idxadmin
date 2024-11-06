@@ -62,7 +62,7 @@ func OidcAuth(c *ghttp.Request) {
 		//	c.AbortWithStatusJSON(401, base.SysResult{Code: 401, Msg: "解析claims失败", Data: err.Error()})
 
 	}
-	g.Log().Info(c.Context(), "claims", claims)
+	g.Log().Debug(c.Context(), "claims", claims)
 	sub, err := claims.GetSubject()
 	if err != nil {
 		g.Log().Error(c.Context(), "claims.GetSubject()", err)

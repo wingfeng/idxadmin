@@ -5,8 +5,6 @@ import (
 	"database/sql"
 	"fmt"
 
-	"log/slog"
-
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/os/gtime"
 	"github.com/gogf/gf/v2/util/gconv"
@@ -28,7 +26,7 @@ func init() {
 	service.RegisterClient(New())
 }
 func New() service.IClient {
-	slog.Info("Client service register")
+
 	return &sClient{}
 }
 
@@ -79,6 +77,7 @@ func (s *sClient) Save(ctx context.Context, req *v1.SaveReq) (err error) {
 	return err
 }
 func (s *sClient) Delete(ctx context.Context, req *v1.DeleteReq) (err error) {
+
 	_, err = dao.Clients.Ctx(ctx).Delete("id=?", req.Id)
 	return err
 }
@@ -124,5 +123,18 @@ func (s *sClient) GetSecrets(ctx context.Context, req *v1.GetClientSecretsReq) (
 }
 func (s *sClient) DeleteSecret(ctx context.Context, req *v1.DeleteSecretReq) error {
 	_, err := dao.ClientSecrets.Ctx(ctx).Delete("id=?", req.Id)
+	return err
+}
+func (s *sClient) SetCORS(ctx context.Context, req *v1.SetCORSReq) error {
+	_, err := dao.ClientCorsOrigins.Ctx(ctx).Delete("client_id=?", req.ClientId)
+	for _, origin := range req.Origins {
+		_, err := dao.ClientCorsOrigins.Ctx(ctx).Insert(do.ClientCorsOrigins{
+			ClientId: req.ClientId,
+			Origin:   origin,
+		})
+		if err != nil {
+			return err
+		}
+	}
 	return err
 }

@@ -10,6 +10,8 @@ type Options struct {
 	JWKsUrl   string
 	EnabledUI bool
 	UIPath    string
+	RedisUrl  string
+	RedisDB   int
 }
 
 // jwt:
@@ -34,6 +36,18 @@ func GetOptions(ctx context.Context) *Options {
 		op.JWKsUrl = ""
 	} else {
 		op.JWKsUrl = e.String()
+	}
+	e, err = g.Cfg().Get(ctx, "cache.redis_db")
+	if err != nil {
+		op.RedisDB = 0
+	} else {
+		op.RedisDB = e.Int()
+	}
+	e, err = g.Cfg().Get(ctx, "cache.redis_url")
+	if err != nil {
+		op.RedisUrl = ""
+	} else {
+		op.RedisUrl = e.String()
 	}
 	return op
 }

@@ -58,6 +58,9 @@ var (
 					}
 
 				})
+				s.BindHandler("GET:/", func(r *ghttp.Request) {
+					r.Response.RedirectTo("/ui")
+				})
 			}
 
 			s.Run()

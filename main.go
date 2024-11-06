@@ -1,6 +1,8 @@
 package main
 
 import (
+	"flag"
+
 	_ "github.com/wingfeng/idxadmin/internal/packed"
 
 	_ "github.com/gogf/gf/contrib/drivers/pgsql/v2"
@@ -11,5 +13,11 @@ import (
 )
 
 func main() {
+	initPreset := flag.Bool("init", false, "Initialize the preset client and user")
+	flag.Parse()
+	if *initPreset {
+		cmd.Preset.Run(gctx.GetInitCtx())
+		return
+	}
 	cmd.Main.Run(gctx.GetInitCtx())
 }
