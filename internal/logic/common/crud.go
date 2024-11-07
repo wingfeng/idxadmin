@@ -7,7 +7,7 @@ import (
 	"github.com/gogf/gf/v2/database/gdb"
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/wingfeng/idxadmin/internal/model"
-	"github.com/wingfeng/idxadmin/internal/service"
+	"github.com/wingfeng/idxadmin/service"
 )
 
 type sCRUD[entity interface{}] struct {

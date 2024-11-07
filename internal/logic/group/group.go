@@ -10,7 +10,7 @@ import (
 	"github.com/wingfeng/idxadmin/internal/model"
 	"github.com/wingfeng/idxadmin/internal/model/do"
 	"github.com/wingfeng/idxadmin/internal/model/entity"
-	"github.com/wingfeng/idxadmin/internal/service"
+	"github.com/wingfeng/idxadmin/service"
 )
 
 type sGroup struct {

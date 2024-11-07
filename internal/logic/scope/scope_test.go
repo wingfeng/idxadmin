@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/gogf/gf/v2/test/gtest"
-	"github.com/wingfeng/idxadmin/internal/service"
+	"github.com/wingfeng/idxadmin/service"
 )
 
 func TestDelet(t *testing.T) {

@@ -7,7 +7,7 @@ import (
 	_ "github.com/gogf/gf/contrib/drivers/pgsql/v2"
 	"github.com/gogf/gf/v2/test/gtest"
 	"github.com/wingfeng/idxadmin/internal/model"
-	"github.com/wingfeng/idxadmin/internal/service"
+	"github.com/wingfeng/idxadmin/service"
 )
 
 func Test_Tree(t *testing.T) {

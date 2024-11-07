@@ -7,7 +7,7 @@ import (
 	"github.com/wingfeng/idxadmin/internal/logic/common"
 	"github.com/wingfeng/idxadmin/internal/model"
 	"github.com/wingfeng/idxadmin/internal/model/entity"
-	"github.com/wingfeng/idxadmin/internal/service"
+	"github.com/wingfeng/idxadmin/service"
 )
 
 type sOrgUnit struct {

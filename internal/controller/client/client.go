@@ -8,7 +8,7 @@ import (
 	"context"
 
 	v1 "github.com/wingfeng/idxadmin/api/client/v1"
-	"github.com/wingfeng/idxadmin/internal/service"
+	"github.com/wingfeng/idxadmin/service"
 )
 
 func (c *ControllerV1) Save(ctx context.Context, req *v1.SaveReq) (res *v1.SaveRes, err error) {

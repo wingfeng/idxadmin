@@ -5,7 +5,7 @@ import (
 
 	"github.com/wingfeng/idx/utils"
 	"github.com/wingfeng/idxadmin/internal/model/entity"
-	"github.com/wingfeng/idxadmin/internal/service"
+	"github.com/wingfeng/idxadmin/service"
 )
 
 type sUtils struct{}

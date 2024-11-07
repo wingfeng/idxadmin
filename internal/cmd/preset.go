@@ -10,7 +10,7 @@ import (
 	v1 "github.com/wingfeng/idxadmin/api/user/v1"
 	"github.com/wingfeng/idxadmin/internal/consts"
 	"github.com/wingfeng/idxadmin/internal/model/entity"
-	"github.com/wingfeng/idxadmin/internal/service"
+	"github.com/wingfeng/idxadmin/service"
 )
 
 var (

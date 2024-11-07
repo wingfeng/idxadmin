@@ -4,7 +4,7 @@ import (
 	"context"
 
 	v1 "github.com/wingfeng/idxadmin/api/scope/v1"
-	"github.com/wingfeng/idxadmin/internal/service"
+	"github.com/wingfeng/idxadmin/service"
 )
 
 func (c *ControllerV1) Get(ctx context.Context, req *v1.GetReq) (res *v1.GetRes, err error) {

@@ -8,7 +8,7 @@ import (
 	_ "github.com/gogf/gf/contrib/drivers/pgsql/v2"
 	"github.com/gogf/gf/v2/test/gtest"
 	v1 "github.com/wingfeng/idxadmin/api/user/v1"
-	"github.com/wingfeng/idxadmin/internal/service"
+	"github.com/wingfeng/idxadmin/service"
 )
 
 func TestResetPwd(t *testing.T) {

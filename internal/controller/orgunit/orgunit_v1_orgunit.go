@@ -8,7 +8,7 @@ import (
 	"github.com/gogf/gf/v2/util/gconv"
 	v1 "github.com/wingfeng/idxadmin/api/orgunit/v1"
 	"github.com/wingfeng/idxadmin/internal/model/entity"
-	"github.com/wingfeng/idxadmin/internal/service"
+	"github.com/wingfeng/idxadmin/service"
 )
 
 func (c *ControllerV1) Tree(ctx context.Context, req *v1.TreeReq) (res *v1.TreeRes, err error) {
