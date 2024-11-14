@@ -79,7 +79,7 @@ func OidcAuth(c *ghttp.Request) {
 }
 func verifyHeader(header string) (string, error) {
 	if strings.EqualFold(header, "") {
-		return "", fmt.Errorf("Header为空")
+		return "", fmt.Errorf("http header %s为空", consts.AUTHORIZATION_HEADER)
 	}
 	s := strings.Split(header, " ")
 	if len(s) != 2 {

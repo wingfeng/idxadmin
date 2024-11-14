@@ -49,7 +49,7 @@ var (
 				Enabled:            true,
 				GrantTypes:         "authorization_code",
 				ClientUri:          "http://localhost:8090/",
-				Scopes:             "openid profile email",
+				Scopes:             "openid profile email admin",
 				Description:        "IDX Admin UI",
 				RedirectUris:       "http://localhost:*/ui/auth/callback http://localhost:5666/auth/callback http://localhost:*/auth/callback http://localhost/ui/auth/callback",
 				RequireSecret:      false,

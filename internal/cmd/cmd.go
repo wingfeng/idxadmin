@@ -7,6 +7,7 @@ import (
 
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/net/ghttp"
+	"github.com/gogf/gf/v2/net/goai"
 	"github.com/gogf/gf/v2/os/gcmd"
 
 	"github.com/wingfeng/idxadmin/internal/conf"
@@ -27,6 +28,29 @@ var (
 		Brief: "start http server",
 		Func: func(ctx context.Context, parser *gcmd.Parser) (err error) {
 			s := g.Server()
+			api := s.GetOpenApi()
+			oauth := goai.SecurityRequirement{
+				"idxauth": {"idxauth"},
+			}
+			api.Security = &goai.SecurityRequirements{
+				oauth,
+			}
+
+			api.Components.SecuritySchemes = goai.SecuritySchemes{
+				"idxauth": goai.SecuritySchemeRef{
+					Value: &goai.SecurityScheme{Type: "oauth",
+						OpenIdConnectUrl: "http://localhost:9097/idx/",
+						Flows: &goai.OAuthFlows{AuthorizationCode: &goai.OAuthFlow{
+							AuthorizationURL: "/oauth2/authorize",
+							TokenURL:         "/idx/oauth2/token",
+							Scopes: map[string]string{
+								"admin": "admin",
+							},
+						}}},
+				},
+			}
+			//	api.Components.Schemas
+
 			s.Group("/api/v1", func(group *ghttp.RouterGroup) {
 				group.Middleware(ghttp.MiddlewareHandlerResponse)
 				group.Middleware(middleware.OidcAuth)
